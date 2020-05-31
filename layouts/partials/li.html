@@ -1,12 +1,16 @@
 <article class="archive-article archive-type-post">
     <div class="archive-article-inner">
-        <header class="archive-article-header">
-            <a href="{{ .RelPermalink }}" class="archive-article-date">
-                <time datetime='{{ .Date.Format "2006-01-02T15:04:05.000-07:00" }}' itemprop="datePublished">{{ .Date.Format "2006 Jan 2" }}</time>
-            </a>
-            <h1 itemprop="name">
-                <a class="archive-article-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
-            </h1>
-        </header>
+        <a class="archive-article-header" href="{{ .RelPermalink }}">
+            <p class="archive-article-date">
+                <time datetime='{{ .Date.Format "2006-01-02T15:04:05.000-07:00" }}' itemprop="datePublished">
+                    {{ .Date.Day }} de
+                    {{ index $.Site.Data.meses (printf "%d" .Date.Month) }} de
+                    {{ .Date.Year }}
+                </time>
+            </p>
+            <h2 itemprop="name" class="no-margin">
+                <span class="archive-article-title"></span>{{ .Title }}</span>
+            </h2>
+        </a>
     </div>
 </article>

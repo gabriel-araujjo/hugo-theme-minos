@@ -1,36 +1,52 @@
 <article class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
-        {{ if .Title }}
-        <header class="article-header">
-            <h1 class="article-title" itemprop="name">{{ .Title }}</h1>
-        </header>
+        {{ $Site := .Site }}
+        {{ if .Params.tags }}
+        <div class="tags">
+            <ul class="article-tag-list">
+                {{ range .Params.tags }}
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="{{ $Site.BaseURL}}/tags/{{ . | urlize }}">{{ . }}
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
         {{ end }}
-        <div class="article-meta">
-            {{- if not .Params.omitDate }}
-            <a href="{{ .RelPermalink }}" class="article-date">
-                <time datetime='{{ .Date.Format "2006-01-02T15:04:05.000-07:00" }}' itemprop="datePublished">{{ .Date.Format "2006-01-02" }}</time>
-            </a>
-            {{ end -}}
-            {{ $Site := .Site }}
-            {{ if .Params.categories }}
-            <div class="post-categories">
-                <div class="article-category">
-                    {{ range $i, $e := .Params.categories }}
-                    {{ if gt $i 0 }}
-                    <span>&gt;</span>
-                    {{ end }}
-                    <a class="article-category-link" href="{{ $Site.BaseURL }}/categories/{{ $e | urlize }}">{{ $e }}</a>
+        <div class="article-entry" itemprop="articleBody">
+            {{ if .Title }}
+            <h1 class="article-title" itemprop="name">{{ .Title }}</h1>
+            {{ end }}
+            <div class="article-meta">
+                {{ if .Params.authors }}
+                <div class="authors">
+                    {{ T "by" }}
+                    {{ range $i, $e := .Params.authors }}
+                        {{ if gt $i 0 }}
+                        <span>, </span>
+                        {{ end }}
+                        <a href="{{ $Site.BaseURL }}/author/{{ $e | urlize }}">{{ $e }}</a>
                     {{ end }}
                 </div>
+                {{ end }}
+                {{ if .Params.categories }}
+                <div class="post-categories">
+                    <div class="article-category">
+                        {{ range $i, $e := .Params.categories }}
+                        {{ if gt $i 0 }}
+                        <span>&gt;</span>
+                        {{ end }}
+                        <a class="article-category-link" href="{{ $Site.BaseURL }}/categories/{{ $e | urlize }}">{{ $e }}</a>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+                {{ if .Site.DisqusShortname }}
+                <div class="article-comment-link-wrap">
+                    <a href="{{ .RelPermalink }}#disqus_thread" class="article-comment-link">Comments</a>
+                </div>
+                {{ end }}
             </div>
-            {{ end }}
-            {{ if .Site.DisqusShortname }}
-            <div class="article-comment-link-wrap">
-                <a href="{{ .RelPermalink }}#disqus_thread" class="article-comment-link">Comments</a>
-            </div>
-            {{ end }}
-        </div>
-        <div class="article-entry" itemprop="articleBody">
             {{ .Content }}
         </div>
 
@@ -81,20 +97,6 @@
                 }
             })();
         </script>
-        {{ end }}
-
-
-        {{ if .Params.tags }}
-        <footer class="article-footer">
-            <ul class="article-tag-list">
-                {{ range .Params.tags }}
-                <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="{{ $Site.BaseURL}}/tags/{{ . | urlize }}">{{ . }}
-                    </a>
-                </li>
-                {{ end }}
-            </ul>
-        </footer>
         {{ end }}
     </div>
     {{ partial "nav.html" . }}

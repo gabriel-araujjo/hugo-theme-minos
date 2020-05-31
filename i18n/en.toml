@@ -12,3 +12,6 @@ other = "Prev"
 
 [Next]
 other = "Next"
+
+[by]
+other = "by"

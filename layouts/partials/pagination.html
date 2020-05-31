@@ -1,19 +1,31 @@
 {{ $pag := $.Paginator }}
 {{ if gt $pag.TotalPages 1 }}
-<nav id="page-nav">
-    {{ if $pag.HasPrev }}
-    <a href="{{ $pag.Prev.URL }}" rel="prev" class="extend prev">&laquo; {{ T "Prev" }}</a>
-    {{ end }}
-    {{ range $pag.Pagers }}
-    {{ if eq . $pag }}
-    <span class="page-number current">{{ $pag.PageNumber }}</span>
-    {{ else }}
-    <a href="{{ .URL }}">{{ .PageNumber }}</a>
-    {{ end }}
-    {{ end }}
-
-    {{ if $pag.HasNext }}
-    <a href="{{ $pag.Next.URL }}" rel="next" class="extend next">{{ T "Next" }} &raquo;</a>
-    {{ end }}
+<nav class="page-nav">
+    <div class="prev">
+        {{ if $pag.HasPrev }}
+            <a href="{{ $pag.Prev.URL }}" rel="prev">← {{ T "Prev" }}</a>
+        {{ end }}
+    </div>
+    <div class="pages">
+        {{ range $pag.Pagers }}
+            {{ if not (eq .PageNumber 1) }}
+                <span class="divisor">⋅</span>
+            {{ end }}
+            {{ if eq . $pag }}
+                <span class="page current">
+                    <span class="number">{{ $pag.PageNumber }}</span>
+                </span>
+            {{ else }}
+                <a class="page" href="{{ .URL }}">
+                    <span class="number">{{ .PageNumber }}</span>
+                </a>
+            {{ end }}
+        {{ end }}
+    </div>
+    <div class="next">
+        {{ if $pag.HasNext }}
+            <a href="{{ $pag.Next.URL }}" rel="next">{{ T "Next" }} →</a>
+        {{ end }}
+    </div>
 </nav>
 {{ end }}
