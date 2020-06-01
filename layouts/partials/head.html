@@ -7,13 +7,21 @@
     {{ partial "og.html" . }}
 
     {{- with .OutputFormats.Get "rss" -}}
-    <link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
+        <link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
     {{- end }}
-    <link rel="shortcut icon" href="/favicon.ico">
+
+    <script>(function(u,c){u.host!==(new URL(c)).host&&location.href.replace(c+u.pathname+u.search)})(new URL(location.href), "{{ .Site.BaseURL }}")</script>
+
+    <link rel="preload" href="{{ "fonts/LinLibertine_R.woff" | absURL }}">
+    <link rel="preload" href="{{ "fonts/LinLibertine_RB.woff" | absURL }}">
+    <link rel="preload" href="{{ "fonts/LinLibertine_RI.woff" | absURL }}">
+    <link rel="preload" href="{{ "fonts/LinLibertine_RBI.woff" | absURL }}">
 
     <link href="https://fonts.googleapis.com/css2?family=Arapey&family=Roboto&family=Roboto+Condensed:wght@300;400;700&family=Viaoda+Libre&display=swap" rel="stylesheet"> 
 
-    <link rel="stylesheet" href="{{ "css/style.css" | absURL }}">
+    {{ $styles := resources.Get "css/style.css" | minify | fingerprint }}
+
+    <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}">
     {{ range .Site.Params.customCss -}}
         <link rel="stylesheet" href="{{ . | absURL }}">
     {{- end }}
