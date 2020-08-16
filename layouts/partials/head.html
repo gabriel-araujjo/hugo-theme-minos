@@ -10,7 +10,7 @@
         <link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
     {{- end }}
 
-    <script>(function(u,c){u.host!==(new URL(c)).host&&location.replace(c+u.pathname+u.search)})(new URL(location.href), "{{ .Site.BaseURL }}")</script>
+    <script>//(function(u,c){u.host!==(new URL(c)).host&&location.replace(c+u.pathname+u.search)})(new URL(location.href), "{{ .Site.BaseURL }}")</script>
 
     <link rel="preload" href="{{ "fonts/LinLibertine_R.woff" | absURL }}">
     <link rel="preload" href="{{ "fonts/LinLibertine_RB.woff" | absURL }}">
