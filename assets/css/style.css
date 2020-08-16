@@ -1407,3 +1407,7 @@ a:hover {
 .rainbow-background {
   animation: animColor 10s linear infinite;
 }
+
+.push-footer {
+  min-height: calc(100% - 297px);
+}
