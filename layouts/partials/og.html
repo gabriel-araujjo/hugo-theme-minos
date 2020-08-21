@@ -6,7 +6,9 @@
     <meta property="og:type" content="website" />
     {{- end }}
     <meta property="og:locale" content="{{ .Lang }}" />
-    <meta property="og:url" content="{{ .Permalink }}" />
+    {{ $url := urls.Parse .Permalink }}
+    <meta property="og:url" content="{{ $url.Scheme }}://{{ $url.Host }}{{ $url.Path }}" />
+    <meta property="og:site_name" content="{{ .Site.Title }}">
     {{ if .Params.ogimage -}}
     <meta property="og:image" content="{{ .Params.ogimage }}" />
     {{ else }}
