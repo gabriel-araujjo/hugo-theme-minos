@@ -1,13 +1,13 @@
     <meta property="og:title" content="{{ if .Params.ogtitle }}{{ .Params.ogtitle }}{{ else }}{{ .Title }}{{ end }}" />
-    <meta property="og:description" content="{{ if .Params.ogdescription }}{{ .Params.ogdescription }}{{ else }}{{ .Site.Params.Description }}{{ end }}" />
+    {{- $description := or (.Params.ogdescription) (.Description) (.Site.Params.Description) -}}
+    <meta property="og:description" content="{{ $description }}" />
     {{ if .Params.ogtype -}}
     <meta property="og:type" content="{{ .Params.ogtype }}" />
     {{ else }}
     <meta property="og:type" content="website" />
     {{- end }}
     <meta property="og:locale" content="{{ .Lang }}" />
-    {{ $url := urls.Parse .Permalink }}
-    <meta property="og:url" content="{{ $url.Scheme }}://{{ $url.Host }}{{ $url.Path }}" />
+    <meta property="og:url" content="{{ .Permalink }}" />
     <meta property="og:site_name" content="{{ .Site.Title }}">
     {{ if .Params.ogimage -}}
     <meta property="og:image" content="{{ .Params.ogimage }}" />
