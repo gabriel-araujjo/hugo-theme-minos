@@ -1233,6 +1233,14 @@ a:hover {
   font-variant-ligatures: none;
 }
 
+.edition-wrap .edition-org {
+  font-family: inherit;
+  font-size: 1em;
+  font-variant-ligatures: none;
+  margin-top: -1.2em;
+  margin-bottom: 0;
+}
+
 .edition-wrap .edition-number {
   font-family: inherit;
 }
