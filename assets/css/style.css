@@ -321,6 +321,10 @@ hr.line::before {
   content: "\f0c9";
 }
 
+#main-nav-toggle:hover {
+  border: 0;
+}
+
 @media screen and (max-width: 839px) {
   #main-nav-toggle {
     display: block;
@@ -411,7 +415,7 @@ mark {
 
 .article-inner {
   margin-bottom: 15px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .article-meta:before, .article-meta:after {
