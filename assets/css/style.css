@@ -1409,3 +1409,45 @@ a:hover {
 .push-footer {
   min-height: calc(100% - 297px);
 }
+
+.indexer {
+  display: block;
+}
+
+.indexer:hover {
+  border: 0;
+}
+
+.indexer > figure {
+  margin: 0;
+  padding: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.indexer-logo {
+  width: 216px;
+  height: 182px;
+  flex: 1;
+}
+
+.indexer-logo + figcaption {
+  color: inherit;
+  min-width: 336px;
+  flex: 2;
+  margin: 0 20px;
+}
+
+@media screen and (max-width: 640px) {
+  .indexer > figure {
+    display: block;
+  }
+
+  .indexer-logo + figcaption {
+    text-align: center;
+    margin: auto;
+  }
+}
