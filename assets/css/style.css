@@ -1451,3 +1451,16 @@ a:hover {
     margin: auto;
   }
 }
+
+.anais img {
+  float: left;
+  margin: .4em 1em .4em 0;
+  max-width: 200px;
+}
+
+@media screen and (max-width: 640px) {
+  .anais img {
+    float: none;
+    margin: 1em auto;
+  }
+}
