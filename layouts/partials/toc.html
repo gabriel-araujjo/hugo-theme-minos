@@ -1,0 +1,27 @@
+<div class="article-toc custom-scrollbar sb-hover" {{ if .Site.Params.SmartToc }}style="display:none;"{{ end }}>
+    <h2>{{ T "Contents" }}</h2>
+    {{ $Section := "" }}
+    <div class="arcticles-thumbs">
+        {{ if .GetTerms "series" }}
+        {{ $series := .Site.Taxonomies.series}}
+        {{ range (.GetTerms "series") }}
+        {{ range sort .Pages "File.Path" }}
+        {{ if ne $Section .Params.section }}
+        {{ $Section = .Params.section }}
+        <h3>{{ $Section }}</h3>
+        {{ end }}
+        <a href="{{ .Page.Permalink }}">{{ .Page.LinkTitle }}</a>
+        <br />
+        {{ end }}
+        {{ end}}
+        {{ end }}
+    </div>
+    <script>
+        document.querySelectorAll('.article-thumb')
+            .forEach(e => {
+                e.addEventListener('click', () => {
+                    window.location = e.attributes.href.value;
+                })
+            })
+    </script>
+</div>

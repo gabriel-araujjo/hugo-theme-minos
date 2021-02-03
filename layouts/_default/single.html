@@ -1,9 +1,79 @@
 {{ partial "head.html" . }}
 
+{{ $number := 0 }}
+
 <body>
 <div id="container">
     {{ partial "header.html" . }}
     <section id="main" class="outer">
+        <div class="mrg-top flx">
+        {{ if .GetTerms "series" }}
+        {{ $series := .Site.Taxonomies.series}}
+        
+        {{ range (.GetTerms "series") }}
+        {{ range .Pages }}
+        {{ if eq ("edition") .Page.Params.type }}
+            <a class="no-dec card flx-g1" href="..">
+                <div class="ed-back-thumb wth-mxct">
+                    <img
+                        src="../{{ .Page.Params.cover }}"
+                        width="50"
+                        height="71"
+                        alt="Capa da Revista Galo Nº {{ .Page.Params.number }} de {{ .Page.Params.year }}">
+                    <div class="txt-sml">
+                        <span class="dsp-blk strg">{{ .Page.Title }}</span>
+                        <span class="dsp-blk">Ano {{ sub .Page.Params.year 2019 }}, nº {{ .Page.Params.number }}</span>
+                        <span class="dsp-blk">{{ index $.Site.Data.semestres (printf "%d" .Page.Params.semester ) }} de {{ .Page.Params.year }}</span>
+                    </div>
+                </div>
+                {{ $number = .Page.Params.number }}
+            </a>
+        {{end}}
+        {{end}}
+        {{end}}
+        {{end}}
+            <div class="card flx-g6 txt-sml" style="width: min(300px, 50%); min-height: 9rem;">
+                <div>
+                    <div class="ps-rel">
+                        <span class="strg">Como citar?</span>
+                        <span class="ps-abs rgt">
+                            <select name="ct-fmt" id="ct-fmt" aria-label="Formato">
+                                <option value="apa">APA</option>
+                                <option value="abnt" selected>ABNT</option>
+                                <option value="bbt">BibTeX</option>
+                                <option value="hvd">Harvard</option>
+                                <option value="vcv">Vancouver</option>
+                            </select>
+                        </span>
+                    </div>
+                    <div id="ct-out" class="mrg-top">&nbsp;</div>
+                </div>
+                {{ if .Params.pages }}
+                <script type="module">
+                    (() => {
+                        const c = cite(document.querySelector('#ct-out'), {
+                            type: "article-journal",
+                            title: "{{ .Title }}{{if .Params.subtitle }}: {{ .Params.subtitle }}{{end}}",
+                            author: {{ .Params.authors }},
+                            journal: "{{ .Site.Data.journal.name }}",
+                            page: "{{ index .Params.pages 0 }}-{{ index .Params.pages 1 }}",
+                            issue: "{{ $number }}",
+                            issued: [
+                                "{{ .Date.Year }}",
+                                "{{ printf "%d" .Date.Month }}",
+                                "{{ .Date.Day }}",
+                            ],
+                            year: "{{ .Params.year }}",
+                        });
+                        const s = document.querySelector('#ct-fmt');
+                        s.addEventListener('change', () => c(s.value));
+                        c(s.value);
+                    })();
+                </script>
+                {{ end }}
+            </div>
+        </div>
+
         {{ partial "article.html" . }}
         {{ if and (not .Params.nocomment) .Site.DisqusShortname }}
             {{ template "_internal/disqus.html" . }}

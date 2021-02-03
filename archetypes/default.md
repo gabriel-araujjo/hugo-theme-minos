@@ -1,6 +1,7 @@
 +++
 Description = ""
 Tags = ["development", "golang"]
-Categories = ["Development", "Golang"]
+toc = true
+series = []
 menu = ""
 +++

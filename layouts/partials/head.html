@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ .Lang }}">
 <head>
-    <link rel="preload" href="https://use.typekit.net/af/af619f/00000000000000003b9b00c5/27/l?primer=bdc973ea9945bf2ee2550957b401916e56fc5fc4cec4e29110795767e60d6b9a&fvd=n7&v=3" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://use.typekit.net/af/6c275f/00000000000000003b9b00c6/27/l?primer=bdc973ea9945bf2ee2550957b401916e56fc5fc4cec4e29110795767e60d6b9a&fvd=i7&v=3" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://use.typekit.net/af/5cace6/00000000000000003b9b00c2/27/l?primer=bdc973ea9945bf2ee2550957b401916e56fc5fc4cec4e29110795767e60d6b9a&fvd=i4&v=3" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://use.typekit.net/af/2011b6/00000000000000003b9b00c1/27/l?primer=bdc973ea9945bf2ee2550957b401916e56fc5fc4cec4e29110795767e60d6b9a&fvd=n4&v=3" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.6/dialog-polyfill.css" integrity="sha256-hT0ET4tfm+7MyjeBepBgV2N5tOmsAVKcTWhH82jvoaA=" crossorigin="anonymous">
     <title>{{ .Title }}{{ if ne .Title .Site.Title }} // {{ .Site.Title }}{{ end }}</title>
 
     {{ partial "meta.html" . }}
@@ -22,6 +17,7 @@
     {{- end }}
 
     {{ $styles := resources.Get "css/style.css" | minify | fingerprint }}
+    {{ $cite := resources.Get "js/cite.js" | minify | fingerprint }}
 
     <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}">
     {{ range .Site.Params.customCss -}}
@@ -38,14 +34,30 @@
             var s=document.getElementsByTagName('script')[0];
             sc.src=src;
             if (integrity) sc.integrity=integrity;
-            sc.origin='anonymous';
+            sc.crossorigin='anonymous';
+            s.parentNode.insertBefore(sc,s);
+        }
+        function _lc(src, integrity){
+            var sc=document.createElement('link');
+            sc.rel="stylesheet"
+            var s=document.getElementsByTagName('link')[0];
+            sc.link=src;
+            if (integrity) sc.integrity=integrity;
+            sc.crossorigin='anonymous';
             s.parentNode.insertBefore(sc,s);
         }
     </script>
 
     <script>(function(){
         var d=document.createElement('dialog');
-        if(typeof d.showModal !== 'function') _l('https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.6/dist/dialog-polyfill.js', false);
+        if (typeof d.showModal !== 'function') {
+            _l('https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.6/dist/dialog-polyfill.js', false);
+            _lc('https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.6/dialog-polyfill.css', 'sha256-hT0ET4tfm+7MyjeBepBgV2N5tOmsAVKcTWhH82jvoaA=');
+        }
         else window.dialogPolyfill = {registerDialog: function() {}};
     })();</script>
+    {{ if .Params.pages }}
+    <script src="https://cdn.jsdelivr.net/combine/npm/prismjs@1.23.0,npm/prismjs-bibtex@1.1.0"></script>
+    <script src="{{ $cite.Permalink }}" integrity="{{ $cite.Data.Integrity }}"></script>
+    {{ end }}
 </head>
