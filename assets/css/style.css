@@ -3,6 +3,7 @@
   --hl-color: #046b9a;
   --bg-color: #fff;
   --ol-color: #bfc5cc;
+  --fc-color: rgb(247, 184, 194);
 }
 
 @font-face {
@@ -177,6 +178,7 @@ img, video {
   font-weight: 700;
   line-height: 2.25em;
   margin-right: 25px;
+  padding-bottom: 4px;
   text-decoration: none;
   background-image: none;
 }
@@ -1713,4 +1715,8 @@ pre {
 
 .token.italic {
   font-style: italic;
+}
+
+.hfn {
+  hyphens: auto;
 }

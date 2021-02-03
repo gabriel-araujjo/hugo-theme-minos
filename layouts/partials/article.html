@@ -30,7 +30,9 @@
                 </div>
                 {{ end }}
             </div>
-            {{ .Content }}
+            <div class="hfn">
+                {{ .Content }}
+            </div>
             {{ if .Params.pages }}
             <form action="galo-ed{{.Params.number}}-{{ index .Params.pages 0 }}-{{ index .Params.pages 1 }}.pdf" method="GET">
                 <button class="line-button">Baixar pdf</button>

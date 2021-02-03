@@ -8,14 +8,14 @@
                     <rect x="5" y="11" width="14" height="2"/>
                 </svg>
             </a>
-            <a id="logo" class="logo-text" href="{{ .Site.Home.Permalink }}">{{ .Site.Title }}</a>
+            <a id="logo" class="logo-text vf" href="{{ .Site.Home.Permalink }}">{{ .Site.Title }}</a>
             <nav id="main-nav">
                 {{ $current := . }}
                 {{- range .Site.Menus.main }}
                 {{ $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) (eq $current.URL .URL)}}
                 {{ $active = or $active (eq .Name $current.Title) }}
                 {{ $active = or $active (eq (.Name | replaceRE " " "-" | lower) $current.Section) }}
-                <a class="main-nav-link{{ if $active }} active{{ end }}" href="{{ .URL }}">{{ .Name }}</a>
+                <a class="main-nav-link vf{{ if $active }} active{{ end }}" href="{{ .URL }}">{{ .Name }}</a>
                 {{- end }}
             </nav>
             <nav id="sub-nav">
