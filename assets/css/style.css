@@ -312,7 +312,7 @@ hr.line {
   text-decoration: none;
   transition: opacity 0.2s;
   display: block;
-  padding: 20px 15px;
+  padding: 19px 15px 15px;
   color: inherit;
   position: relative;
 }
