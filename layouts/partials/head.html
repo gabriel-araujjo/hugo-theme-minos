@@ -19,6 +19,12 @@
     {{ $styles := resources.Get "css/style.css" | minify | fingerprint }}
     {{ $cite := resources.Get "js/cite.js" | minify | fingerprint }}
 
+    {{ if .Params.prefetch }}
+    {{ range .Params.prefetch -}}
+        <link rel="prefetch" href="{{ . | absURL }}" >
+    {{- end }}
+    {{ end }}
+
     <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}">
     {{ range .Site.Params.customCss -}}
         <link rel="stylesheet" href="{{ . | absURL }}">
