@@ -11,7 +11,7 @@
             <nav >
                 {{ $current := . }}
                 {{ range .Site.Menus.main }}
-                    {{ $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) (eq $current.URL .URL)}}
+                    {{ $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) (eq $current.Page.RelPermalink .URL)}}
                     {{ $active = or $active (eq .Name $current.Title) }}
                     {{ $active = or $active (eq (.Name | replaceRE " " "-" | lower) $current.Section) }}
                     <a class="main-nav-link{{ if $active }} active{{ end }}" href="{{ .URL }}">{{ .Name }}</a>
