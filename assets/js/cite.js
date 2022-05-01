@@ -38,6 +38,13 @@ const pag = p => {
 };
 const year = i => i[0];
 
+const anchor = (href, content) => {
+    if (!content) content = href;
+    const element = el('a')([txt(content)])
+    element.href = href;
+    return element
+}
+
 const isup = s => s.toUpperCase() === s;
 const islw = s => s.toLowerCase() === s;
 const ap = s => isup(s[s.length - 1]) ? s + '.' : s;
@@ -50,18 +57,22 @@ const fmt = {
         const dat = i => `${i[2]} ${m[i[1]-1]} ${i[0]}`;
         const nam = n => ap(`${n.family.toUpperCase()}, ${ini(n.given).join('. ')}`);
         const auth = a => a.length > 3 ? [txt(nam(a[0])), italic([txt(' et al.')])]: [txt(prd(a.map(n => nam(n)).join('; ')))];
-        return d => {
+        const doixxx = doi => {
+            if (!doi) return [];
             const now = new Date();
-            const doi = d.doi
-                ? ` Disponível em: <${d.doi}>. Acesso em: ${now.getDate()} ${m[now.getMonth()-1]} de ${now.getFullYear()}.`
-                : '';
             return [
-                ...auth(d.author),
-                txt(` ${d.title}. `),
-                b([txt(d.journal)]),
-                txt(`, n. ${d.issue}, p. ${pag(d.page)}, ${dat(d.issued)}.${doi}`)
+                txt(' Disponível em: <'),
+                anchor(doi),
+                txt(`>. Acesso em: ${now.getDate()} ${m[now.getMonth()-1]} de ${now.getFullYear()}.`)
             ];
-        };
+        }
+        return d => [
+            ...auth(d.author),
+            txt(` ${d.title}. `),
+            b([txt(d.journal)]),
+            txt(`, n. ${d.issue}, p. ${pag(d.page)}, ${dat(d.issued)}.`),
+            ...doixxx(d.doi),
+        ];
     })(),
     apa: (() => {
         const nam = n => ap(`${n.family}, ${ini(n.given).join('. ')}`);
@@ -74,15 +85,20 @@ const fmt = {
                 default: return ap(nam(a[0])) + 'et al';
             }
         };
-        return d => {
-            const doi = d.doi ? ` ${d.doi}` : '';
+        const doixxx = doi => {
+            if (!doi) return [];
             return [
-                txt(auth(d.author)),
-                txt(` (${year(d.issued)}). ${d.title}. `),
-                italic([txt(d.journal)]),
-                txt(`, ${d.issue}, ${pag(d.page)}.${doi}`)
+                txt(' '),
+                anchor(doi),
             ];
-        };
+        }
+        return d => [
+            txt(auth(d.author)),
+            txt(` (${year(d.issued)}). ${d.title}. `),
+            italic([txt(d.journal)]),
+            txt(`, ${d.issue}, ${pag(d.page)}.`),
+            ...doixxx(d.doi),
+        ];
     })(),
     hvd: (() => {
         const nam = n => {
@@ -102,13 +118,21 @@ const fmt = {
                 default: return [txt(nam(a[0]) + ' '), italic([txt(' et al.')])];
             }
         };
+        const doixxx = doi => {
+            if (!doi) return [];
+            return [
+                txt(', DOI:'),
+                anchor(doi, doi.replace(/https?:\/\/doi\.org\//, '')),
+            ]
+        };
         return d => {
-            const doi = d.doi ? `, DOI:${d.doi.replace(/https?:\/\/doi\.org\//, '')}` : '';
             return [
                 ...auth(d.author),
                 txt(` (${year(d.issued)}) ‘${d.title},’ `),
                 italic([txt(d.journal)]),
-                txt(`, (${d.issue}), p${pag(d.page)}${doi}.`)
+                txt(`, (${d.issue}), p${pag(d.page)}`),
+                ...doixxx(d.doi),
+                txt('.')
             ];
         };
     })(),
@@ -123,11 +147,19 @@ const fmt = {
             return res;
         };
         const auth = a => a.map(nam).join(', ');
+        const doixxx = doi => {
+            if (!doi) return [];
+            return [
+                txt(' '),
+                anchor(doi),
+                txt('.')
+            ]
+        }
         return d => {
-            const doi = d.doi ? ` ${d.doi}.` : '';
             return [
                 txt(auth(d.author)),
-                txt(`. ${d.title}. ${d.journal}. ${dat(d.issued)}; (${d.issue}):${pag(d.page)}.${doi}`)
+                txt(`. ${d.title}. ${d.journal}. ${dat(d.issued)}; (${d.issue}):${pag(d.page)}.`),
+                ...doixxx(d.doi),
             ];
         };
     })(),
@@ -144,23 +176,45 @@ const fmt = {
             if (parts[0] == parts[1]) return parts[0];
             else return parts.join('--');
         };
+        const doixxx = doi => {
+            if (!doi) return [];
+            return [
+                txt(`
+    doi = {`),
+                anchor(doi),
+                txt('},'),
+            ]
+        }
         const bt = d => {
-            const doi = d.doi ? `
-    doi = {${d.doi}},` : '';
             const tp = d.title.split(/\s+/);
-            return `@article{${d.author[0].family.split(/\s+/).join('')}${year(d.issued)}${cap(tp.find(s => s.length > 1))},
+            return [txt(`@article{${d.author[0].family.split(/\s+/).join('')}${year(d.issued)}${cap(tp.find(s => s.length > 1))},
     author = {${auth(d.author)}},
     title = {${tp.reduce((res, w, i) => res + ' ' + (i && isup(w[0]) ? wrp(w): w), '').trim()}},
     journal = {${d.journal}},
     number = {${d.issue}},
-    year = {${year(d.issued)}},${doi}
+    year = {${year(d.issued)}},`),
+    ...doixxx(d.doi),
+txt(`
     pages = {${pages(d.page)}}
-}`;
+}`),
+];
         };
         const code = d => {
-            const c = el('code')([txt(bt(d))]);
+            const c = el('code')(bt(d));
             c.className = 'language-bib';
             Prism.highlightElement(c);
+            if (d.doi) {
+                const xpath = `//span[text()='{${d.doi}}']`;
+                const link = document.evaluate(xpath, c, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+
+                for (const n of link.childNodes) {
+                    link.removeChild(n)
+                }
+
+                link.appendChild(txt('{'));
+                link.appendChild(anchor(d.doi));
+                link.appendChild(txt('}'));
+            }
             return c;
         };
 
