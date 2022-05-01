@@ -63,7 +63,7 @@ const fmt = {
             return [
                 txt(' Disponível em: <'),
                 anchor(doi),
-                txt(`>. Acesso em: ${now.getDate()} ${m[now.getMonth()-1]} de ${now.getFullYear()}.`)
+                txt(`>. Acesso em: ${now.getDate()} ${m[now.getMonth()]} de ${now.getFullYear()}.`)
             ];
         }
         return d => [
