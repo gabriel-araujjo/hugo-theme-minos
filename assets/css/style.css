@@ -518,7 +518,7 @@ mark {
 
 .article-entry p, .article-entry table {
   line-height: 1.4em;
-  margin: 1.4em 0;
+  margin: 1em 0;
 }
 
 .article-entry h2 {
@@ -1238,6 +1238,7 @@ a:hover {
 
 .thumb-edition-wrap img {
   margin-bottom: 13px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25)) drop-shadow(0 4px 2px rgba(0, 0, 0, 0.25));
 }
 
 .thumb-edition-wrap .cover-wrap {
