@@ -1113,7 +1113,6 @@ h2 {
 }
 
 p {
-  text-align: justify;
   line-height: 1.5;
   margin: .5em 0;
 }
@@ -1139,6 +1138,8 @@ a {
 a:hover {
   text-decoration-line: underline;
   text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
 }
 
 .tags {
@@ -1611,6 +1612,35 @@ dialog a {
 
 .txt-hge {
   font-size: 1.666666667em;
+}
+
+.txt-left {
+  text-align: left;
+}
+
+.txt-justify {
+  text-align: justify;
+}
+
+.proportional-nums {
+  font-variant-numeric: proportional-nums;
+}
+
+.break-all {
+  word-break: break-all;
+}
+
+.ibid-underline {
+  display: inline-block;
+  width: 5em;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: bottom;
+  text-decoration: underline;
+  text-decoration-color: var(--text-color);
+  text-decoration-thickness: 1px;
+  text-decoration-skip-ink: none;
+  color: transparent;
 }
 
 .dsp-blk {
