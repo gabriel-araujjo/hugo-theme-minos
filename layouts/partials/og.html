@@ -1,16 +1,16 @@
-    <meta property="og:title" content="{{ if .Params.ogtitle }}{{ .Params.ogtitle }}{{ else }}{{ .Title }}{{ end }}" />
+    <meta property="og:title" content="{{ if .Params.ogtitle }}{{ .Params.ogtitle }}{{ else }}{{ .Title }}{{ end }}">
     {{- $description := or (.Params.ogdescription) (.Description) (.Site.Params.Description) -}}
-    <meta property="og:description" content="{{ $description }}" />
+    <meta property="og:description" content="{{ $description }}">
     {{ if .Params.ogtype -}}
-    <meta property="og:type" content="{{ .Params.ogtype }}" />
+    <meta property="og:type" content="{{ .Params.ogtype }}">
     {{ else }}
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="website">
     {{- end }}
-    <meta property="og:locale" content="{{ .Lang }}" />
-    <meta property="og:url" content="{{ if .Params.ogurl }}{{ .Params.ogurl }}{{ else }}{{ .Permalink }}{{ end }}" />
+    <meta property="og:locale" content="{{ .Lang }}">
+    <meta property="og:url" content="{{ if .Params.ogurl }}{{ .Params.ogurl }}{{ else }}{{ .Permalink }}{{ end }}">
     <meta property="og:site_name" content="{{ .Site.Title }}">
     {{ if .Params.ogimage -}}
-    <meta property="og:image" content="{{ .Params.ogimage }}" />
+    <meta property="og:image" content="{{ .Params.ogimage }}">
     {{ else }}
-    <meta property="og:image" content="{{ .Site.BaseURL }}/img/ogimage.png" />
+    <meta property="og:image" content="{{ .Site.BaseURL }}/img/ogimage.png">
     {{- end }}

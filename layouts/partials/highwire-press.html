@@ -1,21 +1,22 @@
 {{ if .Params.hwpress -}}
-<meta name="citation_title" content="{{ if .Params.ogtitle }}{{ .Params.ogtitle }}{{ else }}{{ .Title }}{{ end }}"/>
+<meta name="citation_title" content="{{ if .Params.ogtitle }}{{ .Params.ogtitle }}{{ else }}{{ .Title }}{{ end }}">
 {{ if .Params.authors -}}
 {{ range $e := .Params.authors }}<meta name=citation_author content="{{ $e.family }}, {{ $e.given }}">{{ end }}
 {{- end}}
-<meta name="citation_publication_date" content="{{.Date.Format "2006-01-02"}}"/>
-<meta name="citation_journal_title" content="Revista Galo"/>
-<meta name="citation_journal_abbrev" content="Galo"/>
-<meta name="citation_issn" content="2675-7400"/>
-<meta name="citation_issue" content="{{ .Page.Params.number }}"/>
-<meta name="citation_firstpage" content="{{ index .Params.pages 0 }}"/>
-<meta name="citation_lastpage" content="{{ index .Params.pages 1 }}"/>
-<meta name="citation_pdf_url" content="{{ printf "%sgalo-ed%d-%s-%s.pdf" .Permalink .Params.number (index .Params.pages 0) (index .Params.pages 1) }}"/>
-<meta name="citation_language" content="{{ if .Params.language }}{{ .Params.language }}{{ else }}pt{{ end }}"/>
+<meta name="citation_publication_date" content="{{ .Date.Format "2006/01/02" }}">
+<meta name="citation_journal_title" content="Revista Galo">
+<meta name="citation_journal_abbrev" content="Galo">
+<meta name="citation_issn" content="2675-7400">
+<meta name="citation_volume" content="{{ sub .Params.year 2019 }}">
+<meta name="citation_issue" content="{{ .Page.Params.number }}">
+<meta name="citation_firstpage" content="{{ index .Params.pages 0 }}">
+<meta name="citation_lastpage" content="{{ index .Params.pages 1 }}">
+<meta name="citation_pdf_url" content="{{ printf "%sgalo-ed%d-%s-%s.pdf" .Permalink .Params.number (index .Params.pages 0) (index .Params.pages 1) }}">
+<meta name="citation_language" content="{{ if .Params.language }}{{ .Params.language }}{{ else }}pt{{ end }}">
 {{ if .Params.doi -}}
-<meta name="citation_doi" content="{{ replace .Params.doi "https://doi.org/" "" }}"/>
+<meta name="citation_doi" content="{{ replace .Params.doi "https://doi.org/" "" }}">
 {{- end}}
 {{ if .Params.tags -}}
-{{ range $t := .Params.tags }}<meta name="citation_keywords" content="{{ $t }}"/>{{ end }}
+{{ range $t := .Params.tags }}<meta name="citation_keywords" content="{{ $t }}">{{ end }}
 {{- end}}
 {{- end }}
