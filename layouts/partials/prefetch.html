@@ -1,0 +1,18 @@
+{{- if .Params.cover -}}
+    <link rel="prefetch" href="{{ .Params.cover }}">
+{{- end -}}
+
+{{- if .GetTerms "series" -}}
+    {{- $series := .Site.Taxonomies.series -}}
+    {{- range (.GetTerms "series") -}}
+        {{- range .Pages -}}
+            {{- if eq ("edition") .Page.Params.type -}}
+                <link rel="prefetch" href="../{{ .Page.Params.cover }}">
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+{{- range .Params.prefetch -}}
+    <link rel="prefetch" href="{{ . }}/">
+{{- end -}}

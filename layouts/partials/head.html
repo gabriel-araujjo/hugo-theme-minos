@@ -3,6 +3,7 @@
 <head>
     <title>{{ .Title }}{{ if ne .Title .Site.Title }} // {{ .Site.Title }}{{ end }}</title>
 
+    {{ partial "prefetch.html" . }}
     {{ partial "meta.html" . }}
     {{ partial "og.html" . }}
     {{ partial "highwire-press.html" . }}
