@@ -1375,10 +1375,10 @@ a:hover {
   0% {
     background: hsl(0, 96%, 39%);
   }
-  12.5% {
+  25% {
     background: hsl(45, 89%, 50%);
   }
-  25% {
+  /* 25% {
     background: hsl(90, 88%, 22%);
   }
   37.5% {
@@ -1389,11 +1389,11 @@ a:hover {
   }
   62.5% {
     background: hsl(225, 48%, 48%);
-  }
-  75% {
+  } */
+  50% {
     background: hsl(270, 80%, 57%);
   }
-  87.5% {
+  75% {
     background: hsl(315, 75%, 49%);
   }
   100% {
