@@ -1373,36 +1373,36 @@ a:hover {
 
 @keyframes animColor {
   0% {
-    background: hsl(0, 63%, 84%);
+    background: hsl(0, 96%, 39%);
   }
   12.5% {
-    background: hsl(45, 63%, 84%);
+    background: hsl(45, 89%, 50%);
   }
   25% {
-    background: hsl(90, 63%, 84%);
+    background: hsl(90, 88%, 22%);
   }
   37.5% {
-    background: hsl(135, 63%, 84%);
+    background: hsl(135, 41%, 49%);
   }
   50% {
-    background: hsl(180, 63%, 84%);
+    background: hsl(180, 69%, 57%);
   }
   62.5% {
-    background: hsl(225, 63%, 84%);
+    background: hsl(225, 48%, 48%);
   }
   75% {
-    background: hsl(270, 63%, 84%);
+    background: hsl(270, 80%, 57%);
   }
   87.5% {
-    background: hsl(315, 63%, 84%);
+    background: hsl(315, 75%, 49%);
   }
   100% {
-    background: hsl(360, 63%, 84%);
+    background: hsl(0, 96%, 39%);
   }
 }
 
 .rainbow-background {
-  animation: animColor 10s linear infinite;
+  animation: animColor 30s linear infinite;
 }
 
 .push-footer {
