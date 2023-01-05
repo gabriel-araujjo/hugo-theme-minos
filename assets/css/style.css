@@ -312,7 +312,7 @@ hr.line {
   text-decoration: none;
   transition: opacity 0.2s;
   display: block;
-  padding: 19px 15px 15px;
+  padding: 19px 12px 12px;
   color: inherit;
   position: relative;
 }
@@ -1373,7 +1373,7 @@ a:hover {
 
 @keyframes animColor {
   0% {
-    background: hsl(0, 96%, 39%);
+    background: hsl(0, 56%, 43%);
   }
   25% {
     background: hsl(45, 89%, 50%);
@@ -1397,7 +1397,7 @@ a:hover {
     background: hsl(315, 75%, 49%);
   }
   100% {
-    background: hsl(0, 96%, 39%);
+    background: hsl(0, 56%, 43%);
   }
 }
 
