@@ -312,7 +312,7 @@ hr.line {
   text-decoration: none;
   transition: opacity 0.2s;
   display: block;
-  padding: 19px 12px 12px;
+  padding: 19px 10px 12px;
   color: inherit;
   position: relative;
 }
@@ -1357,6 +1357,7 @@ a:hover {
 #home-main-nav {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .hidden-overflow-x {

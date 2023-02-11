@@ -7,8 +7,8 @@
             <span class="small-text">Revista</span><br>
             GALO
         </h1>
-        <div id="home-main-nav">
-            <nav >
+        <div>
+            <nav id="home-main-nav">
                 {{ $current := . }}
                 {{ range .Site.Menus.main }}
                     {{ $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) (eq $current.Page.RelPermalink .URL)}}
