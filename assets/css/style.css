@@ -1757,3 +1757,12 @@ pre {
 .hfn {
   hyphens: auto;
 }
+
+@keyframes highlight-bg {
+  from {background-color: rgb(46 49 53 / 25%);}
+  to {background-color: rgb(46 49 53 / 0%);}
+}
+
+.thumb-edition-wrap.highlight {
+  animation: highlight-bg 1s ease-in-out 1s 3 alternate backwards;
+}
