@@ -2,9 +2,13 @@
     <div class="outer">
         {{ partial "end-hearts.html" . }}
         <div id="footer-info" class="inner">
-            &copy; {{ now.Format "2006"}} {{ or .Site.Author.name .Site.Title }} &mdash; ISSN 2675-7400<br>
-            <span class="txtsc">doi</span>: https://doi.org/10.53919/g<br>
-            Biblioteca Ocidente &mdash; LIBRUM LUX MUNDI <br>
+            &copy; {{ now.Format "2006"}} {{ or .Site.Author.name .Site.Title }}<br>
+            <ul class="inline-list doted">
+                <li>ISSN&nbsp;(eletrônico)&nbsp;2675‑7400</li>
+                <li>ISSN&nbsp;(impresso)&nbsp;2966‑1080</li>
+                <li><span class=txtsc>doi</span>:&nbsp;<a href=https://doi.org/10.53919/g style="font-weight: normal; color: inherit;">https://doi.org/10.53919/g</a></li>
+            </ul>
+            Biblioteca Ocidente &mdash; LIBRUM LUX MUNDI<br>
             Parnamirim-RN, Brasil
         </div>
     </div>
