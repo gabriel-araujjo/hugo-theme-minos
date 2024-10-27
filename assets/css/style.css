@@ -1206,7 +1206,7 @@ a:hover {
   background: white;
   color: var(--hl-color);
   font-family: -system-ui, sans-serif;
-  padding: .6em 1.6em;
+  padding: .6em 1em;
   border-radius: 4pt;
   font-size: 74%;
   border: 1pt solid;
