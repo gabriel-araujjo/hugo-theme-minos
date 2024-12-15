@@ -1202,6 +1202,10 @@ a:hover {
   content: "#";
 }
 
+form.dl-form > input.email {
+  display: none;
+}
+
 .line-button {
   background: white;
   color: var(--hl-color);
