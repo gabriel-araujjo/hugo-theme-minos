@@ -1416,7 +1416,7 @@ form.dl-form > input.email {
 
 .thumb-edition-wrap {
     display: grid;
-    grid-template-columns: 106pt auto;
+    grid-template-columns: 150pt auto;
     gap: 1em;
     cursor: pointer;
 }
